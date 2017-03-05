@@ -1,3 +1,4 @@
+
 # Get file from https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip
 # store and extract it in the parent folder in respect of this R file
 # Read all data
@@ -9,9 +10,13 @@ data$Date <- suppressWarnings(as.Date(data$Date, "%d/%m/%Y"))
 subData <- subset(data[data$Date >= as.Date("2007-02-01") & data$Date<= as.Date("2007-02-02"),])
 # Setup PNG file
 png("plot3.png",width=572,height=698)
+# mfrom = Column and row count, mar = vector of lines of margins in respect to bottom, top, left , rigth
+par(mfrow = c(1, 1), mar = c(5, 4, 1, 1))
 # Plot base line for Sub_meetering_1
 with(subData, plot(Sub_metering_1 ~ Datetime, type = "l",
-                 ylab = "Energy sub metering", xlab = NA, col = "black"))
+                 ylab = "Energy sub metering", xlab = NA, col = "black", xaxt = 'n'))
+# X-Axis localization
+axis.POSIXct(1, at=seq(as.Date("2007-02-01"), as.Date("2007-02-03"), by="day"), format="%a",labels = c("Thu", "Fri", "Sat"))
 # print additional lines for Sub_metering_2 and Sub_metering_3
 lines(subData$Datetime, subData$Sub_metering_2, col = "red")
 lines(subData$Datetime, subData$Sub_metering_3, col = "blue")

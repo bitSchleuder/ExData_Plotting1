@@ -9,7 +9,10 @@ data$Date <- suppressWarnings(as.Date(data$Date, "%d/%m/%Y"))
 subData <- subset(data[data$Date >= as.Date("2007-02-01") & data$Date<= as.Date("2007-02-02"),])
 # Setup PNG file
 png("plot2.png",width=572,height=698)
+# mfrom = Column and row count, mar = vector of lines of margins in respect to bottom, top, left , rigth
+par(mfrow = c(1, 1), mar = c(5, 4, 1, 1))
 # Plot the data values
-with(subData, plot(Global_active_power ~ Datetime, type = "l", ylab = "Global Active Power (kilowatts)", xlab = NA))
+with(subData, plot(Global_active_power ~ Datetime, type = "l", ylab = "Global Active Power (kilowatts)", xlab = NA, xaxt = 'n'))
+axis.POSIXct(1, at=seq(as.Date("2007-02-01"), as.Date("2007-02-03"), by="day"), format="%a",labels = c("Thu", "Fri", "Sat"))
 # Finish
 dev.off()

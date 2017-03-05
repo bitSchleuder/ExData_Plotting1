@@ -8,6 +8,8 @@ data[, "Date"] <- suppressWarnings(as.Date(data[, "Date"], "%d/%m/%Y"))
 subData <- subset(data[data$Date >= as.Date("2007-02-01") & data$Date<= as.Date("2007-02-02"),])
 # Setup PNG file
 png("plot1.png",width=572,height=698)
+# mfrom = Column and row count, mar = vector of lines of margins in respect to bottom, top, left , rigth
+par(mfrow = c(1, 1), mar = c(5, 4, 1, 1))
 # Plot hist
 hist(x=subData$Global_active_power, col = "red", main = "Global Active Power", xlab = "Global Active Power (kilowatts)")
 # Finish
